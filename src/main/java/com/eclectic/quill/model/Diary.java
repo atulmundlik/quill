@@ -3,6 +3,11 @@ package com.eclectic.quill.model;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.eclectic.quill.enums.BOOKMARK_TYPE;
 import com.eclectic.quill.enums.DIARY_TYPE;
 
@@ -11,12 +16,17 @@ import com.eclectic.quill.enums.DIARY_TYPE;
  * @author atul_mundlik
  *
  */
+@Document(collection="diaries")
+@TypeAlias("diary")
 public class Diary {
 
+	@Id
 	private String diaryId;
 
+	//@Field(value="Diary_Name")
 	private String diaryName;
 
+	//@Field(value="Diary_Type")
 	private DIARY_TYPE type;
 
 	// Need to be short
@@ -28,8 +38,9 @@ public class Diary {
 	private long numberOfPages;
 
 	private Page currentPage;
-	
-	private List<Chapter> chapters;
+
+	@DBRef
+	private List<Month> months;
 
 	// Bookmarked pages with type.
 	// ex - this page is important to me or this is marked for later edit/view
@@ -100,12 +111,12 @@ public class Diary {
 		this.description = description;
 	}
 
-	public List<Chapter> getChapters() {
-		return chapters;
+	public List<Month> getMonths() {
+		return months;
 	}
 
-	public void setChapters(List<Chapter> chapters) {
-		this.chapters = chapters;
+	public void setMonths(List<Month> months) {
+		this.months = months;
 	}
 
 }

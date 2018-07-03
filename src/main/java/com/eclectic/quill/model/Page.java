@@ -2,19 +2,27 @@ package com.eclectic.quill.model;
 
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.eclectic.quill.enums.BOOKMARK_TYPE;
+
 /**
  * 
  * @author atul_mundlik
  *
  */
+@Document(collection="pages")
+@TypeAlias("page")
 public class Page {
 
+	@Id
 	private String pageId;
 
 	private Long pageNo;
 
-	private Chapter chapter;
+	private Month month;
 
 	private BOOKMARK_TYPE type;
 
@@ -43,12 +51,12 @@ public class Page {
 		this.pageNo = pageNo;
 	}
 
-	public Chapter getDiary() {
-		return chapter;
+	public Month getMonth() {
+		return month;
 	}
 
-	public void setDiary(Chapter chapter) {
-		this.chapter = chapter;
+	public void setMonth(Month month) {
+		this.month = month;
 	}
 
 	public BOOKMARK_TYPE getType() {
